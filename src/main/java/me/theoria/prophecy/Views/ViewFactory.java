@@ -1,28 +1,105 @@
 package me.theoria.prophecy.Views;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import me.theoria.prophecy.Controllers.Admin.AdminController;
 import me.theoria.prophecy.Controllers.Client.ClientController;
 
 public class ViewFactory {
 
     //Client Views
     private AnchorPane dashboardView;
+    private final StringProperty clientSelectedMenuItem;
+    private AnchorPane accountsView;
 
-    public ViewFactory(){}
+    //Admin Views
+    private final StringProperty adminSelectedMenuItem;
+    private AnchorPane transactionsView;
+    private AnchorPane createClientView;
+
+
+
+    public ViewFactory(){
+        this.clientSelectedMenuItem = new SimpleStringProperty("");
+        this.adminSelectedMenuItem = new SimpleStringProperty("");
+    }
+
+    /*Client Views Section */
+
+    public StringProperty getClientSelectedMenuItem() {
+        return clientSelectedMenuItem;
+    }
+
 
     public AnchorPane getDashboardView() {
         if (dashboardView == null) {
             try {
-                dashboardView = new FXMLLoader(getClass().getResource("/FXML/Client/Dashboard.fxml")).load();
+                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Client/Dashboard.fxml")).load();
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
         return dashboardView;
+    }
 
+    public AnchorPane getTransactionsView() {
+        if (transactionsView == null){
+            try {
+                transactionsView = new FXMLLoader(getClass().getResource("/Fxml/Client/Transactions.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return transactionsView;
+    }
+
+    public AnchorPane getAccountsView() {
+        if (accountsView == null){
+            try {
+                accountsView = new FXMLLoader(getClass().getResource("/Fxml/Client/Accounts.fxml")).load();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return accountsView;
+    }
+
+
+
+    public void showClientWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Client.fxml"));
+        ClientController clientController = new ClientController();
+        loader.setController(clientController);
+        createStage(loader);
+    }
+
+    /* Admin Views Section */
+
+    public StringProperty getAdminSelectedMenuItem(){
+        return adminSelectedMenuItem;
+    }
+
+
+    public AnchorPane getCreateClientView() {
+        if(createClientView == null){
+            try {
+                createClientView = new FXMLLoader(getClass().getResource("/Fxml/Admin/CreateClient.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return createClientView;
+    }
+
+    public void showAdminWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxml/Admin/Admin.fxml"));
+        AdminController controller = new AdminController();
+        loader.setController(controller);
+        createStage(loader);
     }
 
     public void showLoginWindow() {
@@ -31,12 +108,6 @@ public class ViewFactory {
 
     }
 
-    public void showClientWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Client.fxml"));
-        ClientController clientController = new ClientController();
-        loader.setController(clientController);
-        createStage(loader);
-    }
 
     private void createStage(FXMLLoader loader) {
         Scene scene = null;

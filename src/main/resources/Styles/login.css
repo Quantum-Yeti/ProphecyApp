@@ -4,7 +4,7 @@
 
 /* Logo Container Styles */
 .login_logo_container {
-    -fx-background-color: #132A13;
+    -fx-background-color: #145dad;
     -fx-alignment: center;
 }
 
@@ -14,12 +14,12 @@
 }
 
 .login_logo_container FontAwesomeIconView {
-    -fx-fill: #ECF39E;
+    -fx-fill: #091c1c;
 }
 
 /* Account Selector Styles */
 .account_selector {
-    -fx-background-color: #ECF39E;
+    -fx-background-color: #d6e8e8;
 }
 
 .account_selector .label {
@@ -58,7 +58,7 @@
 }
 
 .login_form_container .button {
-    -fx-background-color: #132A13;
+    -fx-background-color: #3b919f;
     -fx-text-fill: #FFFFFF;
     -fx-pref-width: 350;
     -fx-pref-height: 30;
