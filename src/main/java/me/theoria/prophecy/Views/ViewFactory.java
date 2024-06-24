@@ -1,36 +1,50 @@
 package me.theoria.prophecy.Views;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import me.theoria.prophecy.Controllers.Admin.AdminController;
 import me.theoria.prophecy.Controllers.Client.ClientController;
 
 public class ViewFactory {
+    //Account Selector
+    private AccountType loginAccountType;
 
     //Client Views
     private AnchorPane dashboardView;
-    private final StringProperty clientSelectedMenuItem;
+    private final ObjectProperty<ClientMenuOptions> clientSelectedMenuItem;
     private AnchorPane accountsView;
 
     //Admin Views
-    private final StringProperty adminSelectedMenuItem;
+    private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
     private AnchorPane transactionsView;
     private AnchorPane createClientView;
+    private AnchorPane clientsView;
+    private AnchorPane depositView;
 
-
-
+    /* View Factory - ObjectProperties */
     public ViewFactory(){
-        this.clientSelectedMenuItem = new SimpleStringProperty("");
-        this.adminSelectedMenuItem = new SimpleStringProperty("");
+        this.loginAccountType = AccountType.CLIENT;
+        this.clientSelectedMenuItem = new SimpleObjectProperty<>();
+        this.adminSelectedMenuItem = new SimpleObjectProperty<>();
+    }
+
+    /* Login Setter Getter */
+
+    public AccountType getLoginAccountType() {
+        return loginAccountType;
+    }
+
+    public void setLoginAccountType(AccountType loginAccountType) {
+        this.loginAccountType = loginAccountType;
     }
 
     /*Client Views Section */
-
-    public StringProperty getClientSelectedMenuItem() {
+    public ObjectProperty<ClientMenuOptions> getClientSelectedMenuItem() {
         return clientSelectedMenuItem;
     }
 
@@ -68,8 +82,6 @@ public class ViewFactory {
         return accountsView;
     }
 
-
-
     public void showClientWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Client.fxml"));
         ClientController clientController = new ClientController();
@@ -78,11 +90,9 @@ public class ViewFactory {
     }
 
     /* Admin Views Section */
-
-    public StringProperty getAdminSelectedMenuItem(){
+    public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem(){
         return adminSelectedMenuItem;
     }
-
 
     public AnchorPane getCreateClientView() {
         if(createClientView == null){
@@ -95,8 +105,30 @@ public class ViewFactory {
         return createClientView;
     }
 
+    public AnchorPane getClientsView() {
+        if (clientsView == null){
+            try {
+                clientsView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Clients.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return clientsView;
+    }
+
+    public AnchorPane getDepositView() {
+        if (depositView == null){
+            try {
+                depositView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Deposit.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return depositView;
+    }
+
     public void showAdminWindow() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Fxml/Admin/Admin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
         AdminController controller = new AdminController();
         loader.setController(controller);
         createStage(loader);
@@ -108,7 +140,7 @@ public class ViewFactory {
 
     }
 
-
+    /* Create JavaFX Stage */
     private void createStage(FXMLLoader loader) {
         Scene scene = null;
         try {
@@ -119,10 +151,13 @@ public class ViewFactory {
 
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icon.png"))));
+        stage.setResizable(false);
         stage.setTitle("Prophecy");
         stage.show();
     }
 
+    /* Close JavaFX Stages */
     public void closeStage(Stage stage) {
         stage.close();
     }

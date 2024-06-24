@@ -27,7 +27,7 @@
 .accounts_view_container TextField {
     -fx-pref-width: 230;
     -fx-pref-height: 35;
-    -fx-background-color: #FFFFFFF;
+    -fx-background-color: #FFFFFF;
     -fx-effect: dropshadow(three-pass-box, #AAAAAA, 3, 0, 0, 3);
 }
 

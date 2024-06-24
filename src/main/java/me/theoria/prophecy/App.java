@@ -12,10 +12,10 @@ public class App extends Application {
 
         //Testing splash screen/login
 
-        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();*/
+        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Login.fxml"));
+        //Scene scene = new Scene(fxmlLoader.load());
+        //stage.setScene(scene);
+        //stage.show();
 
         Model.getInstance().getViewFactory().showLoginWindow();
 
