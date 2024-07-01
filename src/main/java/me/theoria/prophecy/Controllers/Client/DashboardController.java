@@ -10,11 +10,11 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     public Text user_name;
     public Label login_date;
-    public Label checking_bal;
-    public Label checking_acc_num;
-    public Label savings_bal;
-    public Label savings_acc_num;
-    public Label income_lbl;
+    public Label liquid_bal;
+    public Label liquid_acc_num;
+    public Label sales_bal;
+    public Label sales_acc_num;
+    public Label sales_lbl;
     public Label expense_lbl;
     public ListView transaction_listview;
     public TextField payee_fld;

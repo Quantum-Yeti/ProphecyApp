@@ -12,8 +12,8 @@
       <Label fx:id="fName_lbl" text="Martha" />
       <Label fx:id="lName_lbl" text="Jones" />
       <Label fx:id="pAddress_lbl" text="\@mJones1" />
-      <Label fx:id="ch_acc_lbl" styleClass="acc_display_lbl" text="2587753" />
-      <Label fx:id="sv_acc_lbl" styleClass="acc_display_lbl" text="6475698" />
+      <Label fx:id="liq_acc_lbl" styleClass="acc_display_lbl" text="2587753" />
+      <Label fx:id="sales_acc_lbl" styleClass="acc_display_lbl" text="6475698" />
       <Label fx:id="date_lbl" text="2024-10-14" />
    </HBox>
    <Button fx:id="delete_btn" layoutX="664.0" layoutY="13.0" mnemonicParsing="false" styleClass="delete_btn" text="Delete" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0">

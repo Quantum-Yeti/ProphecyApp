@@ -2,6 +2,7 @@ package me.theoria.prophecy.Controllers.Client;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import me.theoria.prophecy.Models.Model;
 import me.theoria.prophecy.Views.ClientMenuOptions;
 
@@ -24,6 +25,7 @@ public class ClientMenuController implements Initializable {
         dashboard_btn.setOnAction(event -> onDashboard());
         transaction_btn.setOnAction(event -> onTransactions());
         accounts_btn.setOnAction(event -> onAccounts());
+        logout_btn.setOnAction(event -> onLogout());
     }
 
     private void onDashboard() {
@@ -38,6 +40,16 @@ public class ClientMenuController implements Initializable {
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.ACCOUNTS);
     }
 
+    private void onLogout() {
+        // Retrieve stage
+        Stage stage = (Stage) dashboard_btn.getScene().getWindow();
+        // Close the stage
+        Model.getInstance().getViewFactory().closeStage(stage);
+        // Return primary stage
+        Model.getInstance().getViewFactory().showLoginWindow();
+        // Set Re-evaluation of credentials to false
+        Model.getInstance().setClientLoginSuccessCheck(false);
+    }
 
 
 }

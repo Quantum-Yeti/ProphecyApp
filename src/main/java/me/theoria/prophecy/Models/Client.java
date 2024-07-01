@@ -11,16 +11,16 @@ public class Client {
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty payeeAddress;
-    private final ObjectProperty<Account> checkingAccount;
-    private final ObjectProperty<Account> savingsAccount;
+    private final ObjectProperty<Account> liquidAccount;
+    private final ObjectProperty<Account> salesAccount;
     private final ObjectProperty<LocalDate> dateCreate;
 
     public Client(String fName, String lName, String pAddress, Account cAccount, Account sAccount, LocalDate date) {
         this.firstName = new SimpleStringProperty(this, "FirstName", fName);
         this.lastName = new SimpleStringProperty(this, "LastName", lName);
         this.payeeAddress = new SimpleStringProperty(this, "Payee Address", pAddress);
-        this.checkingAccount = new SimpleObjectProperty<>(this, "Checking Account", cAccount);
-        this.savingsAccount = new SimpleObjectProperty<>(this, "Savings Account", sAccount);
+        this.liquidAccount = new SimpleObjectProperty<>(this, "Liquid Account", cAccount);
+        this.salesAccount = new SimpleObjectProperty<>(this, "Sales Account", sAccount);
         this.dateCreate = new SimpleObjectProperty<>(this, "Date", date);
     }
 
@@ -37,11 +37,11 @@ public class Client {
     }
 
     public ObjectProperty<Account> cAccountProperty() {
-        return checkingAccount;
+        return liquidAccount;
     }
 
     public ObjectProperty<Account> sAccountProperty() {
-        return savingsAccount;
+        return salesAccount;
     }
 
     public ObjectProperty<LocalDate> dateProperty() {

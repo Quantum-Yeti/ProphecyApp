@@ -12,8 +12,8 @@ public class ClientCellController implements Initializable {
     public Label fName_lbl;
     public Label lName_lbl;
     public Label pAddress_lbl;
-    public Label ch_acc_lbl;
-    public Label sv_acc_lbl;
+    public Label liq_acc_lbl;
+    public Label sales_acc_lbl;
     public Label date_lbl;
     public Button delete_btn;
 
@@ -25,6 +25,11 @@ public class ClientCellController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        fName_lbl.textProperty().bind(client.firstNameProperty());
+        lName_lbl.textProperty().bind(client.lastNameProperty());
+        pAddress_lbl.textProperty().bind(client.pAddressProperty());
+        liq_acc_lbl.textProperty().bind(client.cAccountProperty().asString());
+        sales_acc_lbl.textProperty().bind(client.sAccountProperty().asString());
+        date_lbl.textProperty().bind(client.dateProperty().asString());
     }
 }

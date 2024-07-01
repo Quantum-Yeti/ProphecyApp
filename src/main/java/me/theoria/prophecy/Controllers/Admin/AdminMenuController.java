@@ -2,6 +2,7 @@ package me.theoria.prophecy.Controllers.Admin;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import me.theoria.prophecy.Models.Model;
 import me.theoria.prophecy.Views.AdminMenuOptions;
 
@@ -23,6 +24,7 @@ public class AdminMenuController implements Initializable {
         create_client_btn.setOnAction(event -> onCreateClient());
         clients_btn.setOnAction(event -> onClients());
         deposit_btn.setOnAction(event -> onDeposit());
+        logout_btn.setOnAction(event -> onLogout());
     }
 
     private void onCreateClient() {
@@ -35,6 +37,17 @@ public class AdminMenuController implements Initializable {
 
     private void onDeposit() {
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.DEPOSIT);
+    }
+
+    private void onLogout() {
+        // Retrieve stage
+        Stage stage = (Stage) clients_btn.getScene().getWindow();
+        // Close the stage
+        Model.getInstance().getViewFactory().closeStage(stage);
+        // Return primary stage
+        Model.getInstance().getViewFactory().showLoginWindow();
+        // Set Re-evaluation of credentials to false
+        Model.getInstance().setAdminLoginSuccessCheck(false);
     }
 
 }
