@@ -30,6 +30,40 @@ public class DbDriver {
         return resultSet;
     }
 
+    public ResultSet getTransactions(String pAddress, int limit) {
+        Statement statement;
+        ResultSet resultSet = null;
+        try {
+            statement = this.connect.createStatement();
+            resultSet = statement.executeQuery("SELECT  * FROM  Transactions WHERE Sender='"+pAddress+"' OR Receiver='"+pAddress+"' LIMIT  "+limit+";");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet searchClient(String pAddress) {
+        Statement statement;
+        ResultSet resultSet = null;
+        try {
+            statement = this.connect.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM Clients WHERE PayeeAddress='"+pAddress+"';");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public void depositSales(String pAddress, double amount){
+        Statement statement;
+        try {
+            statement = this.connect.createStatement();
+            statement.executeUpdate("UPDATE SalesAccounts SET Balance="+amount+" WHERE  Owner='"+pAddress+"';");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 
     /* Admin Credential */
 

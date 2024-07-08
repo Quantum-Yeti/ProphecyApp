@@ -62,7 +62,7 @@ public class CreateClientController implements Initializable {
         String password = password_fld.getText();
 
         Model.getInstance().getDatabaseDriver().createClient(fName, lName, payeeAddress, password, LocalDate.now());
-        error_lbl.setStyle("-fx-text-fill: blue; -fx-font-size: 1.3em; -fx-font-weight: bold");
+        error_lbl.setStyle("-fx-text-fill: black; -fx-font-size: 1.4em; -fx-font-weight: bold");
         error_lbl.setText("Client Created");
         emptyFields();
     }
@@ -77,7 +77,7 @@ public class CreateClientController implements Initializable {
         String secondVar = Integer.toString(new Random().nextInt(9999) + 1000);
         String accountNumber = firstVar + " " + secondVar;
 
-        if (accountType.equals("Checking")) {
+        if (accountType.equals("Liquid")) {
             Model.getInstance().getDatabaseDriver().createLiquidAccount(payeeAddress, accountNumber, 10, balance);
         } else {
             Model.getInstance().getDatabaseDriver().createSalesAccount(payeeAddress, accountNumber, 200, balance);
