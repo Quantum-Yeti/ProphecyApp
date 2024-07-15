@@ -29,4 +29,8 @@ public abstract class Account {
         return balance;
     }
 
+    public void setBalance(double balance){
+        this.balance.set(balance);
+    }
+
 }

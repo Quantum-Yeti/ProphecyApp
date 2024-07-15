@@ -9,6 +9,7 @@ import me.theoria.prophecy.Models.Transaction;
 import me.theoria.prophecy.Views.TransactionCellFactory;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -33,6 +34,7 @@ public class DashboardController implements Initializable {
         initLatestTransactions();
         transaction_listview.setItems(Model.getInstance().getLatestTransactions());
         transaction_listview.setCellFactory(event -> new TransactionCellFactory());
+        send_money_btn.setOnAction(event -> onSendTrans());
     }
 
     /* Bind data to display user information and populate accounts on primary client window */
@@ -49,6 +51,32 @@ public class DashboardController implements Initializable {
         if (Model.getInstance().getLatestTransactions().isEmpty()) {
             Model.getInstance().setLatestTransactions();
         }
+    }
+
+    private void onSendTrans() {
+        String receiver = payee_fld.getText();
+        double amount = Double.parseDouble(amount_fld.getText());
+        String message = message_fld.getText();;
+        String sender = Model.getInstance().getClient().pAddressProperty().get();
+        ResultSet resultSet = Model.getInstance().getDatabaseDriver().searchClient(receiver);
+        try {
+            if (resultSet.isBeforeFirst()) {
+                Model.getInstance().getDatabaseDriver().updateBalance(receiver, amount, "ADD");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Subtract from sender sales
+        Model.getInstance().getDatabaseDriver().updateBalance(sender, amount, "SUB");
+        // Update sales account
+        Model.getInstance().getClient().sAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getSalesBalance(sender));
+        // Record the new transaction
+        Model.getInstance().getDatabaseDriver().newTransact(sender, receiver, amount, message);
+        // Clear all fields
+        payee_fld.setText("");
+        amount_fld.setText("");
+        message_fld.setText("");
+
     }
 
 }
