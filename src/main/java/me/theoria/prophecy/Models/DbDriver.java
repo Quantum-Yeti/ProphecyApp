@@ -5,9 +5,10 @@ import java.time.LocalDate;
 
 public class DbDriver {
 
-
+    // Initialize database connection
     private Connection connect;
 
+    // Direct database access
     public DbDriver() {
         try {
             this.connect = DriverManager.getConnection("jdbc:sqlite:prophecy.db");
@@ -17,7 +18,7 @@ public class DbDriver {
     }
 
     /* Client Credential */
-
+    // Parse and query client credentials from the database
     public ResultSet getClientData(String pAddress, String password) {
         Statement statement;
         ResultSet resultSet = null;
@@ -30,6 +31,7 @@ public class DbDriver {
         return resultSet;
     }
 
+    // Access account limits per user account address
     public ResultSet getTransactions(String pAddress, int limit) {
         Statement statement;
         ResultSet resultSet = null;
@@ -93,8 +95,7 @@ public class DbDriver {
         }
     }
 
-
-
+    // Update deposit to sales account
     public void depositSales(String pAddress, double amount){
         Statement statement;
         try {
@@ -186,6 +187,7 @@ public class DbDriver {
 
     /* Account Creation Methods */
 
+    //
     public int getLastClientCred() {
         Statement statement;
         ResultSet resultSet;
@@ -202,6 +204,7 @@ public class DbDriver {
 
     /* Account Listing Methods */
 
+    // Result set for SQL statement to return liquid account data
     public ResultSet getLiquidAcctData(String pAddress) {
         Statement statement;
         ResultSet resultSet = null;
@@ -214,6 +217,7 @@ public class DbDriver {
         return resultSet;
     }
 
+    // Result set for SQL statement to return sales account data
     public ResultSet getSalesAcctData(String pAddress) {
         Statement statement;
         ResultSet resultSet = null;

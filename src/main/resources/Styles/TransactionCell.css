@@ -24,6 +24,18 @@
     -fx-stroke: #000000;
 }
 
+.message_btn {
+    -fx-background-color: #FFFFFF;
+}
+
+.message_btn FontAwesomeIconView {
+    -fx-fill: #222121;
+}
+
+.message_btn:hover {
+    -fx-cursor: hand;
+}
+
 .trans_amount_lbl {
     -fx-background-color: #4adde3;
     -fx-background-radius: 2;

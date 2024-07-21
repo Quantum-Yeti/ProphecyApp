@@ -8,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
 
 public class Client {
+    // FXML labels and pointers
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty payeeAddress;
@@ -15,6 +16,7 @@ public class Client {
     private final ObjectProperty<Account> salesAccount;
     private final ObjectProperty<LocalDate> dateCreate;
 
+    // Sets client string properties
     public Client(String fName, String lName, String pAddress, Account cAccount, Account sAccount, LocalDate date) {
         this.firstName = new SimpleStringProperty(this, "FirstName", fName);
         this.lastName = new SimpleStringProperty(this, "LastName", lName);
@@ -24,6 +26,7 @@ public class Client {
         this.dateCreate = new SimpleObjectProperty<>(this, "Date", date);
     }
 
+    // Returns client string properties
     public StringProperty firstNameProperty() {
         return firstName;
     }

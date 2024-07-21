@@ -9,10 +9,12 @@ import me.theoria.prophecy.Views.TransactionCellFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// Initialize FXML listview for the transaction controller and container
 public class TransactionsController implements Initializable {
     public ListView<Transaction> transactions_listview;
 
 
+    // FXML function pointers
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initAllTransactionsL();

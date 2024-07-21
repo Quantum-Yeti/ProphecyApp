@@ -56,7 +56,7 @@
 .alt_menu_btn {
     -fx-pref-width: 115;
     -fx-pref-height: 40;
-    -fx-background-color: #132A13;
+    -fx-background-color: #3b919f;
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 1.1em;
     -fx-alignment: center-left;
@@ -78,7 +78,7 @@
 
 .report_container Text {
     -fx-font-weight: bold;
-    -fx-fill: #132A13;
+    -fx-fill: #3b919f;
 }
 
 .report_container Label {

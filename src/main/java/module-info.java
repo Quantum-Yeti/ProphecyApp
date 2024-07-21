@@ -4,6 +4,7 @@ module me.theoria.prophecy {
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
+    requires jdk.jfr;
 
 
     opens me.theoria.prophecy to javafx.fxml;

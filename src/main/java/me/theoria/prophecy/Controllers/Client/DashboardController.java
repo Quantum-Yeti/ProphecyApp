@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+// FXML labels and pointers
 public class DashboardController implements Initializable {
     public Text user_name;
     public Label login_date;
@@ -28,6 +29,7 @@ public class DashboardController implements Initializable {
     public TextArea message_fld;
     public Button send_money_btn;
 
+    // Initialize functions on button clicks
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bindData();
@@ -35,6 +37,7 @@ public class DashboardController implements Initializable {
         transaction_listview.setItems(Model.getInstance().getLatestTransactions());
         transaction_listview.setCellFactory(event -> new TransactionCellFactory());
         send_money_btn.setOnAction(event -> onSendTrans());
+        accountSummary();
     }
 
     /* Bind data to display user information and populate accounts on primary client window */
@@ -47,12 +50,14 @@ public class DashboardController implements Initializable {
         sales_acc_num.textProperty().bind(Model.getInstance().getClient().sAccountProperty().get().accountNumberProperty());
     }
 
+    // Initialize the latest transactions
     private void initLatestTransactions() {
         if (Model.getInstance().getLatestTransactions().isEmpty()) {
             Model.getInstance().setLatestTransactions();
         }
     }
 
+    // Method to send transactions
     private void onSendTrans() {
         String receiver = payee_fld.getText();
         double amount = Double.parseDouble(amount_fld.getText());
@@ -77,6 +82,23 @@ public class DashboardController implements Initializable {
         amount_fld.setText("");
         message_fld.setText("");
 
+    }
+
+    private void accountSummary() {
+        double income = 0;
+        double expenses = 0;
+        if (Model.getInstance().getAllTransactions().isEmpty()){
+            Model.getInstance().setAllTransactions();
+        }
+        for (Transaction transaction: Model.getInstance().getAllTransactions()) {
+            if (transaction.senderProperty().get().equals(Model.getInstance().getClient().pAddressProperty().get())){
+                expenses = expenses + transaction.amountProperty().get();
+            } else {
+                income = income + transaction.amountProperty().get();
+            }
+        }
+        sales_lbl.setText("+ $" + income);
+        expense_lbl.setText("- $" + expenses);
     }
 
 }

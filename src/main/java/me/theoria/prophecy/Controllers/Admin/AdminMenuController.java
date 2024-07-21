@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminMenuController implements Initializable {
+    // FXML labels and pointers
     public Button create_client_btn;
     public Button clients_btn;
     public Button deposit_btn;
@@ -20,6 +21,7 @@ public class AdminMenuController implements Initializable {
         addListeners();
     }
 
+    // Adding listeners for button events for admin window
     private void addListeners() {
         create_client_btn.setOnAction(event -> onCreateClient());
         clients_btn.setOnAction(event -> onClients());

@@ -25,7 +25,7 @@
                <FontAwesomeIconView glyphName="MONEY" size="20" />
             </graphic>
          </Button>
-         <Button fx:id="accounts_btn" mnemonicParsing="false" text="Accounts">
+         <Button fx:id="modeling_btn" mnemonicParsing="false" text="Modeling">
             <graphic>
                <FontAwesomeIconView glyphName="INSTITUTION" size="20" />
             </graphic>

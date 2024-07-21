@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import me.theoria.prophecy.Models.Model;
 import me.theoria.prophecy.Views.ViewFactory;
 
+// Boot initial FXML login window stage
 public class App extends Application {
     @Override
     public void start(Stage stage) {

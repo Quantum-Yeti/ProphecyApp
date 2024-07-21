@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DepositController implements Initializable {
+    // FXML labels and pointers
     public TextField pAddress_fld;
     public Button search_btn;
     public ListView<Client> result_listview;
@@ -21,12 +22,14 @@ public class DepositController implements Initializable {
 
     private Client client;
 
+    // Set actions for buttons
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         search_btn.setOnAction(event -> onClientSearch());
         deposit_btn.setOnAction(event -> onDeposit());
     }
 
+    // Method to return list of clients
     private void onClientSearch() {
         ObservableList<Client> searchResults = Model.getInstance().searchClient(pAddress_fld.getText());
         result_listview.setItems(searchResults);
@@ -34,6 +37,7 @@ public class DepositController implements Initializable {
         client = searchResults.get(0);
     }
 
+    // Method to deposit money into sales account and return new balance
     private void onDeposit() {
         double amount = Double.parseDouble(amount_fld.getText());
         double newBalance = amount + client.sAccountProperty().get().balanceProperty().get();
@@ -43,6 +47,7 @@ public class DepositController implements Initializable {
         emptyFields();
     }
 
+    // Empty all fields after use
     private void emptyFields() {
         pAddress_fld.setText("");
         amount_fld.setText("");

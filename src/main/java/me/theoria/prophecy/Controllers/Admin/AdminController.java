@@ -8,8 +8,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
+    // Initialize FXML border pain for the administration parent box
     public BorderPane admin_parent;
 
+    //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().addListener((observableValue, oldVal, newVal) -> {

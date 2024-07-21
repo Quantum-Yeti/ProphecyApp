@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    // FXML labels and pointers
     public ChoiceBox<AccountType> acc_selector;
     public Label payee_address_lbl;
     public TextField payee_address_fid;
@@ -20,12 +21,14 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialize resources and set on action listeners
         acc_selector.setItems(FXCollections.observableArrayList(AccountType.CLIENT, AccountType.ADMIN));
         acc_selector.setValue(Model.getInstance().getViewFactory().getLoginAccountType());
         acc_selector.valueProperty().addListener(observable -> setAcc_selector());
         login_btn.setOnAction(event -> onLogin());
     }
 
+    // Method to log in
     private void onLogin() {
         Stage stage = (Stage) error_lbl.getScene().getWindow();
 

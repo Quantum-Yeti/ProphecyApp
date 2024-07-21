@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 public class ClientMenuController implements Initializable {
     public Button dashboard_btn;
     public Button transaction_btn;
-    public Button accounts_btn;
+    public Button modeling_btn;
     public Button profile_btn;
     public Button logout_btn;
 
@@ -24,7 +24,7 @@ public class ClientMenuController implements Initializable {
     private void addListeners() {
         dashboard_btn.setOnAction(event -> onDashboard());
         transaction_btn.setOnAction(event -> onTransactions());
-        accounts_btn.setOnAction(event -> onAccounts());
+        modeling_btn.setOnAction(event -> onAccounts());
         logout_btn.setOnAction(event -> onLogout());
     }
 

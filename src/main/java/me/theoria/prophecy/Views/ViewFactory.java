@@ -3,9 +3,14 @@ package me.theoria.prophecy.Views;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import me.theoria.prophecy.Controllers.Admin.AdminController;
 import me.theoria.prophecy.Controllers.Client.ClientController;
@@ -74,7 +79,7 @@ public class ViewFactory {
     public AnchorPane getAccountsView() {
         if (accountsView == null){
             try {
-                accountsView = new FXMLLoader(getClass().getResource("/Fxml/Client/Accounts.fxml")).load();
+                accountsView = new FXMLLoader(getClass().getResource("/Fxml/Client/Modeling.fxml")).load();
             } catch(Exception e){
                 e.printStackTrace();
             }
@@ -138,6 +143,24 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader);
 
+    }
+
+    public void showMessagePop(String pAddress, String messageText) {
+        StackPane pane = new StackPane();
+        VBox vBox = new VBox(5);
+        vBox.setAlignment(Pos.CENTER);
+        Label sender = new Label(pAddress);
+        Label message = new Label(messageText);
+        vBox.getChildren().addAll(sender, message);
+        pane.getChildren().add(vBox);
+        Scene scene = new Scene(pane,300,100 );
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icon.png"))));
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Messages");
+        stage.setScene(scene);
+        stage.show();
     }
 
     /* Create JavaFX Stage */
