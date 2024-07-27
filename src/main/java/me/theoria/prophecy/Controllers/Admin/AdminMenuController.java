@@ -13,7 +13,7 @@ public class AdminMenuController implements Initializable {
     // FXML labels and pointers
     public Button create_client_btn;
     public Button clients_btn;
-    public Button deposit_btn;
+    public Button adminsum_btn;
     public Button logout_btn;
 
     @Override
@@ -25,7 +25,7 @@ public class AdminMenuController implements Initializable {
     private void addListeners() {
         create_client_btn.setOnAction(event -> onCreateClient());
         clients_btn.setOnAction(event -> onClients());
-        deposit_btn.setOnAction(event -> onDeposit());
+        adminsum_btn.setOnAction(event -> onDeposit());
         logout_btn.setOnAction(event -> onLogout());
     }
 
