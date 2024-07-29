@@ -26,7 +26,7 @@ public class Model {
     private final ObservableList<Client> clients;
 
 
-    private Model() {
+    Model() {
         this.viewFactory = new ViewFactory();
         this.dbDriver = new DbDriver();
 

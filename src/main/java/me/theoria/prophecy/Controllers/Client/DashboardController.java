@@ -21,7 +21,7 @@ public class DashboardController implements Initializable {
     public Label liquid_acc_num;
     public Label sales_bal;
     public Label sales_acc_num;
-    public Label sales_lbl;
+    public Label income_lbl;
     public Label expense_lbl;
     public ListView<Transaction> transaction_listview;
     public TextField payee_fld;
@@ -85,20 +85,21 @@ public class DashboardController implements Initializable {
     }
 
     private void accountSummary() {
-        double income = 0;
-        double expenses = 0;
+        double income = 0.00;
+        double expenses = 0.00;
         if (Model.getInstance().getAllTransactions().isEmpty()){
             Model.getInstance().setAllTransactions();
         }
         for (Transaction transaction: Model.getInstance().getAllTransactions()) {
             if (transaction.senderProperty().get().equals(Model.getInstance().getClient().pAddressProperty().get())){
-                expenses = expenses + transaction.amountProperty().get();
-            } else {
-                income = income + transaction.amountProperty().get();
+                expenses += transaction.amountProperty().get();
+            }
+            if (transaction.receiverProperty().get().equals(Model.getInstance().getClient().pAddressProperty().get())){
+                income += transaction.amountProperty().get();
             }
         }
-        sales_lbl.setText("+ $" + income);
-        expense_lbl.setText("- $" + expenses);
+        this.income_lbl.setText("+ $"+String.valueOf(income));
+        this.expense_lbl.setText("- $"+String.valueOf(expenses));
     }
 
 }

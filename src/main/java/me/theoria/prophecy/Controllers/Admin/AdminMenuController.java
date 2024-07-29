@@ -38,7 +38,7 @@ public class AdminMenuController implements Initializable {
     }
 
     private void onDeposit() {
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.DEPOSIT);
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.SUMMARY);
     }
 
     private void onLogout() {

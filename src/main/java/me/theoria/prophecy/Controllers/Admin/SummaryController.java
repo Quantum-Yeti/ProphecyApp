@@ -12,7 +12,7 @@ import me.theoria.prophecy.Views.ClientCellFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DepositController implements Initializable {
+public class SummaryController implements Initializable {
     // FXML labels and pointers
     public TextField pAddress_fld;
     public Button search_btn;

@@ -1,11 +1,14 @@
 package me.theoria.prophecy.Controllers.Admin;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import me.theoria.prophecy.Models.Client;
+import me.theoria.prophecy.Models.DbDriver;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ClientCellController implements Initializable {
@@ -33,4 +36,9 @@ public class ClientCellController implements Initializable {
         sales_acc_lbl.textProperty().bind(client.sAccountProperty().asString());
         date_lbl.textProperty().bind(client.dateProperty().asString());
     }
+
+    /*private void deleteUser(ActionEvent event) throws ClassNotFoundException, SQLException {
+        DbDriver.deleteUser(pAddress_lbl.getText());
+    }*/
+
 }

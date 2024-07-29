@@ -13,7 +13,7 @@ public class ClientMenuController implements Initializable {
     public Button dashboard_btn;
     public Button transaction_btn;
     public Button modeling_btn;
-    public Button profile_btn;
+    public Button account_info_btn;
     public Button logout_btn;
 
     @Override

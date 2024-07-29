@@ -29,7 +29,7 @@ public class CreateClientController implements Initializable {
     private boolean createLiquidAccountCheck = false;
     private boolean createSalesAccountCheck = false;
 
-    // Initialize and set actions and listeners for Fxml properties
+    // Initialize and set actions and listeners for the create button and Fxml properties
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         create_client_btn.setOnAction(event -> createClient());

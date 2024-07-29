@@ -202,6 +202,29 @@ public class DbDriver {
         return cred;
     }
 
+    // Deletion of users from database
+    /*public static void deleteUser(String pAddress) {
+        String query = "DELETE FROM Users WHERE Address='"+pAddress+"';";
+        try (PreparedStatement statement = connection.preparedStatement(query)) {
+            statement = this.connect.createStatement();
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            System.out.println("Error occurred, try again."+e);
+            throw e;
+        }
+    }
+
+    public void updateUser(String pAddress) {
+        statement = this.connect.createStatement();
+        String query = "UPDATE Clients WHERE id = '"+pAddress+"';";
+        try (PreparedStatement statement = connection.preparedStatement(query)){
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            System.out.println("Error occurred, try again."+e);
+            throw e;
+        }
+    }*/
+
     /* Account Listing Methods */
 
     // Result set for SQL statement to return liquid account data

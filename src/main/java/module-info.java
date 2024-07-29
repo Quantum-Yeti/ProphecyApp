@@ -5,6 +5,7 @@ module me.theoria.prophecy {
     requires java.sql;
     requires org.xerial.sqlitejdbc;
     requires jdk.jfr;
+    requires java.desktop;
 
 
     opens me.theoria.prophecy to javafx.fxml;

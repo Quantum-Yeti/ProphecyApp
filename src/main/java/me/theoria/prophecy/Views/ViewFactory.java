@@ -121,7 +121,7 @@ public class ViewFactory {
         return clientsView;
     }
 
-    public AnchorPane getDepositView() {
+    public AnchorPane getSummaryView() {
         if (depositView == null){
             try {
                 depositView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Deposit.fxml")).load();
