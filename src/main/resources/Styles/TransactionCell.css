@@ -1,49 +1,40 @@
-.cell_container {
+
+
+
+.cell_container{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 10;
-    -fx-effect: dropshadow(three-pass-box, #000000, 5, 0, 0, 7);
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5,0,0,7);
 }
 
-.trans_icon_container {
+.trans_icon_container{
     -fx-background-color: #FFFFFF;
     -fx-alignment: center;
     -fx-spacing: 5;
 }
 
-.trans_date_lbl {
+.trans_date_lbl{
     -fx-text-fill: #AAAAAA;
     -fx-font-weight: 700;
 }
 
-.trans_pAddress_lbl {
+.trans_pAdress_lbl{
     -fx-text-fill: #000000;
     -fx-font-weight: 700;
 }
 
-.cell_container Line {
-    -fx-stroke: #000000;
+.cell_container Line{
+    -fx-stroke: #EEEEEE;
 }
 
-.message_btn {
-    -fx-background-color: #FFFFFF;
-}
-
-.message_btn FontAwesomeIconView {
-    -fx-fill: #222121;
-}
-
-.message_btn:hover {
-    -fx-cursor: hand;
-}
-
-.trans_amount_lbl {
-    -fx-background-color: #4adde3;
+.trans_amount_lbl{
+    -fx-background-color: #132A13;
     -fx-background-radius: 2;
     -fx-text-fill: #FFFFFF;
     -fx-padding: 5;
     -fx-font-weight: 700;
 }
 
-.trans_amount_lbl FontAwesomeIconView {
+.trans_amount_lbl FontAwesomeIconView{
     -fx-fill: #FFFFFF;
 }

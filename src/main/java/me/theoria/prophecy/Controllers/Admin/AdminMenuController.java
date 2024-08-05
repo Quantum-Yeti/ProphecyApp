@@ -1,55 +1,47 @@
 package me.theoria.prophecy.Controllers.Admin;
 
+import me.theoria.prophecy.Models.Model;
+import me.theoria.prophecy.Views.AdminMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import me.theoria.prophecy.Models.Model;
-import me.theoria.prophecy.Views.AdminMenuOptions;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminMenuController implements Initializable {
-    // FXML labels and pointers
     public Button create_client_btn;
     public Button clients_btn;
-    public Button adminsum_btn;
+    public Button deposit_btn;
     public Button logout_btn;
+    public Button summary_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addListeners();
     }
 
-    // Adding listeners for button events for admin window
-    private void addListeners() {
-        create_client_btn.setOnAction(event -> onCreateClient());
-        clients_btn.setOnAction(event -> onClients());
-        adminsum_btn.setOnAction(event -> onDeposit());
-        logout_btn.setOnAction(event -> onLogout());
+    private void addListeners(){
+        create_client_btn.setOnAction(e->onCreateClient());
+        clients_btn.setOnAction(e->onClients());
+        deposit_btn.setOnAction(e->onDeposit());
+        logout_btn.setOnAction(e->onLogout());
     }
 
-    private void onCreateClient() {
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENT);
-    }
+    private void onCreateClient(){Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CREATE_CLIENT);}
 
-    private void onClients() {
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CLIENTS);
-    }
+    private void onClients(){Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.CLIENTS);}
 
-    private void onDeposit() {
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.SUMMARY);
-    }
+    private void onDeposit(){Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.DEPOSIT);}
 
-    private void onLogout() {
-        // Retrieve stage
+    private void onLogout(){
+        // Get Stage
         Stage stage = (Stage) clients_btn.getScene().getWindow();
-        // Close the stage
+        // Close the Admin Window
         Model.getInstance().getViewFactory().closeStage(stage);
-        // Return primary stage
+        // Show Login Window
         Model.getInstance().getViewFactory().showLoginWindow();
-        // Set Re-evaluation of credentials to false
-        Model.getInstance().setAdminLoginSuccessCheck(false);
+        // Set Client Login Success Flag to False
+        Model.getInstance().setAdminLoginSuccessFlag(false);
     }
-
 }

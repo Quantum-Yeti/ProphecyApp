@@ -1,105 +1,113 @@
 package me.theoria.prophecy.Controllers.Client;
 
+import me.theoria.prophecy.Models.Model;
+import me.theoria.prophecy.Models.Transaction;
+import me.theoria.prophecy.Views.TransactionCellFactory;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import me.theoria.prophecy.Models.Model;
-import me.theoria.prophecy.Models.Transaction;
-import me.theoria.prophecy.Views.TransactionCellFactory;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-// FXML labels and pointers
+// Declare DashBoard Controller JavaFX Components
 public class DashboardController implements Initializable {
-    public Text user_name;
     public Label login_date;
-    public Label liquid_bal;
-    public Label liquid_acc_num;
+    public Text user_name;
+    public Label fungible_balance;
+    public Label fungible_acc_num;
     public Label sales_bal;
     public Label sales_acc_num;
     public Label income_lbl;
     public Label expense_lbl;
-    public ListView<Transaction> transaction_listview;
+    public ListView transaction_listview;
     public TextField payee_fld;
     public TextField amount_fld;
     public TextArea message_fld;
     public Button send_money_btn;
 
-    // Initialize functions on button clicks
+
+    // Initialize actions for Dashboard selections and buttons
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bindData();
-        initLatestTransactions();
+        initLatestTransactionsList();
         transaction_listview.setItems(Model.getInstance().getLatestTransactions());
-        transaction_listview.setCellFactory(event -> new TransactionCellFactory());
-        send_money_btn.setOnAction(event -> onSendTrans());
+        transaction_listview.setCellFactory(e->new TransactionCellFactory());
+        send_money_btn.setOnAction(e->{
+            onSendMoney();
+            accountSummary();
+        });
         accountSummary();
     }
 
-    /* Bind data to display user information and populate accounts on primary client window */
-    private void bindData() {
-        user_name.textProperty().bind(Bindings.concat("Hello, ").concat(Model.getInstance().getClient().firstNameProperty()));
-        login_date.setText("Today is: " + LocalDate.now());
-        liquid_bal.textProperty().bind(Model.getInstance().getClient().cAccountProperty().get().balanceProperty().asString());
-        liquid_acc_num.textProperty().bind(Model.getInstance().getClient().cAccountProperty().get().accountNumberProperty());
-        sales_bal.textProperty().bind(Model.getInstance().getClient().sAccountProperty().get().balanceProperty().asString());
-        sales_acc_num.textProperty().bind(Model.getInstance().getClient().sAccountProperty().get().accountNumberProperty());
+    // Bind JavaFX components to data
+    private void bindData(){
+        user_name.textProperty().bind(Bindings.concat("Hi, ").concat(Model.getInstance().getClient().firstNameProperty()));
+        login_date.setText("Today, " + LocalDate.now());
+        fungible_balance.textProperty().bind(Model.getInstance().getClient().fungibleAccountProperty().get().balanceProperty().asString());
+        fungible_acc_num.textProperty().bind(Model.getInstance().getClient().fungibleAccountProperty().get().accountNumberProperty());
+        sales_bal.textProperty().bind(Model.getInstance().getClient().salesAccountProperty().get().balanceProperty().asString());
+        sales_acc_num.textProperty().bind(Model.getInstance().getClient().salesAccountProperty().get().accountNumberProperty());
     }
 
-    // Initialize the latest transactions
-    private void initLatestTransactions() {
-        if (Model.getInstance().getLatestTransactions().isEmpty()) {
+    // Initialize latest transactions
+    private void initLatestTransactionsList(){
+        if(Model.getInstance().getLatestTransactions().isEmpty()){
+            Model.getInstance().setLatestTransactions();
+        }else {
             Model.getInstance().setLatestTransactions();
         }
     }
 
-    // Method to send transactions
-    private void onSendTrans() {
+    // Sending money between fungible and sales accounts
+    private void onSendMoney(){
         String receiver = payee_fld.getText();
         double amount = Double.parseDouble(amount_fld.getText());
-        String message = message_fld.getText();;
+        String message = message_fld.getText();
         String sender = Model.getInstance().getClient().pAddressProperty().get();
         ResultSet resultSet = Model.getInstance().getDatabaseDriver().searchClient(receiver);
-        try {
-            if (resultSet.isBeforeFirst()) {
+        try{
+            if(resultSet.isBeforeFirst()){
                 Model.getInstance().getDatabaseDriver().updateBalance(receiver, amount, "ADD");
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
-        // Subtract from sender sales
+        // Subtract From Sender Savings Account
         Model.getInstance().getDatabaseDriver().updateBalance(sender, amount, "SUB");
-        // Update sales account
-        Model.getInstance().getClient().sAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getSalesBalance(sender));
-        // Record the new transaction
-        Model.getInstance().getDatabaseDriver().newTransact(sender, receiver, amount, message);
-        // Clear all fields
+        // UPDATE The Savings Account BALANCE in the client object
+        Model.getInstance().getClient().salesAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getSalesAccountBalance(sender));
+        // Record NEW Transaction
+        Model.getInstance().getDatabaseDriver().newTransaction(sender, receiver, amount, message);
+        // Add the new transaction to the list
+        Model.getInstance().addTransaction(new Transaction(sender, receiver, amount, LocalDate.now(), message));
+        // Clear the FIELDS
         payee_fld.setText("");
         amount_fld.setText("");
         message_fld.setText("");
-
     }
 
-    private void accountSummary() {
-        double income = 0.00;
-        double expenses = 0.00;
-        if (Model.getInstance().getAllTransactions().isEmpty()){
+    // Method calculates all expenses and income
+    private void accountSummary(){
+        double income = 0;
+        double expenses = 0;
+        if(Model.getInstance().getAllTransactions().isEmpty()){
             Model.getInstance().setAllTransactions();
+        }else {
+            Model.getInstance().updateTransactions();
         }
-        for (Transaction transaction: Model.getInstance().getAllTransactions()) {
+        for(Transaction transaction: Model.getInstance().getAllTransactions()){
             if (transaction.senderProperty().get().equals(Model.getInstance().getClient().pAddressProperty().get())){
-                expenses += transaction.amountProperty().get();
-            }
-            if (transaction.receiverProperty().get().equals(Model.getInstance().getClient().pAddressProperty().get())){
-                income += transaction.amountProperty().get();
+                expenses = expenses + transaction.amountProperty().get();
+            }else{
+                income = income + transaction.amountProperty().get();
             }
         }
-        this.income_lbl.setText("+ $"+String.valueOf(income));
-        this.expense_lbl.setText("- $"+String.valueOf(expenses));
+        income_lbl.setText("+ $"+ income);
+        expense_lbl.setText("- $" + expenses);
     }
-
 }

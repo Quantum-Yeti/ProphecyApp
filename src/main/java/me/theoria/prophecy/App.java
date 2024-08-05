@@ -1,25 +1,17 @@
 package me.theoria.prophecy;
 
-import javafx.application.Application;
-
-import javafx.stage.Stage;
 import me.theoria.prophecy.Models.Model;
-import me.theoria.prophecy.Views.ViewFactory;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-// Boot initial FXML login window stage
 public class App extends Application {
+
     @Override
-    public void start(Stage stage) {
-
-        //Testing splash screen/login
-
-        //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXML/Login.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load());
-        //stage.setScene(scene);
-        //stage.show();
-
+    public void start(Stage stage){
         Model.getInstance().getViewFactory().showLoginWindow();
+    }
 
-
+    public static void main(String[] args) {
+        launch(args);
     }
 }

@@ -1,22 +1,20 @@
 package me.theoria.prophecy.Controllers.Admin;
 
-import javafx.event.ActionEvent;
+import me.theoria.prophecy.Models.Client;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import me.theoria.prophecy.Models.Client;
-import me.theoria.prophecy.Models.DbDriver;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ClientCellController implements Initializable {
-    public Label fName_lbl;
-    public Label lName_lbl;
-    public Label pAddress_lbl;
-    public Label liq_acc_lbl;
-    public Label sales_acc_lbl;
+
+    public Label fname_lbl;
+    public Label lname_lbl;
+    public Label pAdress_lbl;
+    public Label ch_acc_lbl;
+    public Label sv_acc_lbl;
     public Label date_lbl;
     public Button delete_btn;
 
@@ -27,18 +25,12 @@ public class ClientCellController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Bind Properties
-        fName_lbl.textProperty().bind(client.firstNameProperty());
-        lName_lbl.textProperty().bind(client.lastNameProperty());
-        pAddress_lbl.textProperty().bind(client.pAddressProperty());
-        liq_acc_lbl.textProperty().bind(client.cAccountProperty().asString());
-        sales_acc_lbl.textProperty().bind(client.sAccountProperty().asString());
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        fname_lbl.textProperty().bind(client.firstNameProperty());
+        lname_lbl.textProperty().bind(client.lastNameProperty());
+        pAdress_lbl.textProperty().bind(client.pAddressProperty());
+        ch_acc_lbl.textProperty().bind(client.fungibleAccountProperty().asString());
+        sv_acc_lbl.textProperty().bind(client.salesAccountProperty().asString());
         date_lbl.textProperty().bind(client.dateProperty().asString());
     }
-
-    /*private void deleteUser(ActionEvent event) throws ClassNotFoundException, SQLException {
-        DbDriver.deleteUser(pAddress_lbl.getText());
-    }*/
-
 }

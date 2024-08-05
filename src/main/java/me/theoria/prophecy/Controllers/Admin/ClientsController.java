@@ -1,27 +1,26 @@
 package me.theoria.prophecy.Controllers.Admin;
 
-import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
+import me.theoria.prophecy.Models.Client;
 import me.theoria.prophecy.Models.Model;
 import me.theoria.prophecy.Views.ClientCellFactory;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ClientsController implements Initializable {
-    public ListView clientsListview;
+    public ListView<Client> clients_listview;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        // Initialize the client list
-        initClientList();
-        clientsListview.setItems(Model.getInstance().getClients());
-        clientsListview.setCellFactory(c -> new ClientCellFactory());
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initClientsList();
+        clients_listview.setItems(Model.getInstance().getClients());
+        clients_listview.setCellFactory(e->new ClientCellFactory());
     }
 
-    /* If Client ListView is empty, display all clients */
-    private void initClientList() {
-        if (Model.getInstance().getClients().isEmpty()) {
+    private void initClientsList(){
+        if(Model.getInstance().getClients().isEmpty()){
             Model.getInstance().setClients();
         }
     }
