@@ -23,7 +23,7 @@
          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
       <Label id="choice-prompt-text" text="Choose Your Account Type:"/>
       <ChoiceBox fx:id="acc_selector" prefWidth="90.0" styleClass="account_selector"/>
-      <Label fx:id="payee_adress_lbl" text="Payee Adress:"/>
+      <Label fx:id="payee_adress_lbl" text="Username:"/>
       <TextField fx:id="payee_adress_fld" styleClass="input_field"/>
       <Label text="Password:"/>
       <PasswordField fx:id="password_fld" styleClass="input_field"/>
