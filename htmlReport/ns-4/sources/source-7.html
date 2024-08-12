@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > TransactionCellController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Controllers.Client</a>
+</div>
+
+<h1>Coverage Summary for Class: TransactionCellController (me.theoria.prophecy.Controllers.Client)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TransactionCellController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Controllers.Client;
+&nbsp;
+&nbsp;import me.theoria.prophecy.Models.Model;
+&nbsp;import me.theoria.prophecy.Models.Transaction;
+&nbsp;import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+&nbsp;import javafx.fxml.Initializable;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;import javafx.scene.paint.Color;
+&nbsp;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.ResourceBundle;
+&nbsp;
+&nbsp;public class TransactionCellController implements Initializable {
+&nbsp;
+&nbsp;    public FontAwesomeIconView in_icon;
+&nbsp;    public FontAwesomeIconView out_icon;
+&nbsp;    public Label trans_date_lbl;
+&nbsp;    public Label sender_lbl;
+&nbsp;    public Label receiver_lbl;
+&nbsp;    public Label amount_lbl;
+&nbsp;    public Button message_btn;
+&nbsp;
+&nbsp;    private final Transaction transaction;
+&nbsp;
+<b class="nc">&nbsp;    public TransactionCellController(Transaction transaction){</b>
+<b class="nc">&nbsp;        this.transaction = transaction;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void initialize(URL url, ResourceBundle resourceBundle) {
+<b class="nc">&nbsp;        sender_lbl.textProperty().bind(transaction.senderProperty());</b>
+<b class="nc">&nbsp;        receiver_lbl.textProperty().bind(transaction.receiverProperty());</b>
+<b class="nc">&nbsp;        amount_lbl.textProperty().bind(transaction.amountProperty().asString());</b>
+<b class="nc">&nbsp;        trans_date_lbl.textProperty().bind(transaction.dateProperty().asString());</b>
+<b class="nc">&nbsp;        message_btn.setOnAction(e-&gt;Model.getInstance().getViewFactory().showMessageWindow(transaction.senderProperty().get(), transaction.messageProperty().get()));</b>
+<b class="nc">&nbsp;        transactionIcons();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void transactionIcons(){
+<b class="nc">&nbsp;        if(transaction.senderProperty().get().equals(Model.getInstance().getClient().pAddressProperty().get())){</b>
+<b class="nc">&nbsp;            in_icon.setFill(Color.rgb(240,240,240));</b>
+<b class="nc">&nbsp;            out_icon.setFill(Color.RED);</b>
+&nbsp;        }else{
+<b class="nc">&nbsp;            in_icon.setFill(Color.GREEN);</b>
+<b class="nc">&nbsp;            out_icon.setFill(Color.rgb(240,240,240));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

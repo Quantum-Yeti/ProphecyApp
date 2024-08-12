@@ -1,5 +1,6 @@
 package me.theoria.prophecy.Views;
 
+import javafx.scene.control.ScrollPane;
 import me.theoria.prophecy.Controllers.Admin.AdminController;
 import me.theoria.prophecy.Controllers.Client.ClientController;
 import me.theoria.prophecy.Models.Model;
@@ -19,6 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import static me.theoria.prophecy.Controllers.Client.LinearRegression.predictForValue;
+
 public class ViewFactory {
     private AccountType loginAccountType;
     // Client Views
@@ -26,7 +29,7 @@ public class ViewFactory {
     private AnchorPane dashboardView;
     private AnchorPane transactionsView;
     private AnchorPane accountsView;
-    private AnchorPane profileView;
+    private AnchorPane summaryView;
 
     // Admin Views
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -92,14 +95,14 @@ public class ViewFactory {
 
     // Display the summary window
     public AnchorPane getSummaryView(){
-        if(profileView == null){
+        if(summaryView == null){
             try{
-                profileView = new FXMLLoader(getClass().getResource("/Fxml/Client/Summary.fxml")).load();
+                summaryView = new FXMLLoader(getClass().getResource("/Fxml/Client/ClientSummary.fxml")).load();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-        return profileView;
+        return summaryView;
     }
 
     // Create Client window stage in JavaFX
@@ -206,6 +209,27 @@ public class ViewFactory {
         stage.show();
     }
 
+    // Display the linear window
+    public void showLinearWindow(){
+        try {
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.CENTER);
+            TextArea textArea = new TextArea();
+            Scene scene = new Scene(vBox, 300, 100);
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icon.png"))));
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Linear of Regression");
+            stage.setScene(scene);
+            stage.show();
+            //System.out.print(predictForValue(13));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     // Create and display JavaFX stage
     private void createStage(FXMLLoader loader){
         Scene scene = null;
@@ -217,7 +241,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icon.png"))));
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Prophecy");
         stage.show();
     }

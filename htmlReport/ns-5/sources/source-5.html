@@ -1,0 +1,368 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Model</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Models</a>
+</div>
+
+<h1>Coverage Summary for Class: Model (me.theoria.prophecy.Models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Model</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (3/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (2/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.9%
+  </span>
+  <span class="absValue">
+    (13/109)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Models;
+&nbsp;
+&nbsp;import me.theoria.prophecy.Views.ViewFactory;
+&nbsp;import javafx.collections.FXCollections;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;
+&nbsp;import java.sql.*;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import java.util.stream.IntStream;
+&nbsp;
+&nbsp;import static java.util.Arrays.asList;
+&nbsp;
+&nbsp;public class Model {
+&nbsp;    private static Model model;
+&nbsp;    private final ViewFactory viewFactory;
+&nbsp;    private final DatabaseDriver databaseDriver;
+&nbsp;    // Client Data Section
+&nbsp;    private Client client;
+&nbsp;    private boolean clientLoginSuccessFlag;
+&nbsp;    private final ObservableList&lt;Transaction&gt; latestTransactions;
+&nbsp;    private final ObservableList&lt;Transaction&gt; allTransactions;
+&nbsp;    // Admin Data Section
+&nbsp;    private boolean adminLoginSuccessFlag;
+&nbsp;    private final ObservableList&lt;Client&gt; clients;
+&nbsp;
+<b class="fc">&nbsp;    private Model(){</b>
+<b class="fc">&nbsp;        this.viewFactory = new ViewFactory();</b>
+<b class="fc">&nbsp;        this.databaseDriver = new DatabaseDriver();</b>
+&nbsp;        // Client Data Section
+<b class="fc">&nbsp;        this.clientLoginSuccessFlag = false;</b>
+<b class="fc">&nbsp;        this.client = new Client(&quot;&quot;, &quot;&quot;, &quot;&quot;, null, null, null);</b>
+<b class="fc">&nbsp;        this.latestTransactions = FXCollections.observableArrayList();</b>
+<b class="fc">&nbsp;        this.allTransactions = FXCollections.observableArrayList();</b>
+&nbsp;        // Admin Data Section
+<b class="fc">&nbsp;        this.adminLoginSuccessFlag = false;</b>
+<b class="fc">&nbsp;        this.clients = FXCollections.observableArrayList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static synchronized Model getInstance(){
+<b class="fc">&nbsp;        if(model == null){</b>
+<b class="fc">&nbsp;            model = new Model();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return model;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ViewFactory getViewFactory() {
+<b class="fc">&nbsp;        return viewFactory;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public DatabaseDriver getDatabaseDriver(){return databaseDriver;}</b>
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Client Method Section
+&nbsp;     * */
+<b class="nc">&nbsp;    public boolean getClientLoginSuccessFlag(){return this.clientLoginSuccessFlag;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public void setClientLoginSuccessFlag(boolean flag){this.clientLoginSuccessFlag = flag;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public Client getClient() {return client;}</b>
+&nbsp;
+&nbsp;    public void evaluateClientCredentials(String pAddress, String password){
+&nbsp;        FungibleAccount fungibleAccount;
+&nbsp;        SalesAccount salesAccount;
+<b class="nc">&nbsp;        ResultSet resultSet = databaseDriver.getClientData(pAddress, password);</b>
+&nbsp;        try{
+<b class="nc">&nbsp;            if(resultSet.isBeforeFirst()){</b>
+<b class="nc">&nbsp;                this.client.firstNameProperty().set(resultSet.getString(&quot;FirstName&quot;));</b>
+<b class="nc">&nbsp;                this.client.lastNameProperty().set(resultSet.getString(&quot;LastName&quot;));</b>
+<b class="nc">&nbsp;                this.client.pAddressProperty().set(resultSet.getString(&quot;PayeeAddress&quot;));</b>
+<b class="nc">&nbsp;                String[] dateParts = resultSet.getString(&quot;Date&quot;).split(&quot;-&quot;);</b>
+<b class="nc">&nbsp;                LocalDate date = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));</b>
+<b class="nc">&nbsp;                this.client.dateProperty().set(date);</b>
+<b class="nc">&nbsp;                fungibleAccount = getFungibleAccount(pAddress);</b>
+<b class="nc">&nbsp;                salesAccount = getSalesAccount(pAddress);</b>
+<b class="nc">&nbsp;                this.client.fungibleAccountProperty().set(fungibleAccount);</b>
+<b class="nc">&nbsp;                this.client.salesAccountProperty().set(salesAccount);</b>
+<b class="nc">&nbsp;                this.clientLoginSuccessFlag = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void prepareTransactions(ObservableList&lt;Transaction&gt; transactions, int limit) {
+<b class="nc">&nbsp;        ResultSet resultSet = databaseDriver.getTransactions(this.client.pAddressProperty().get(), limit);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            while (resultSet.next()) {</b>
+<b class="nc">&nbsp;                String sender = resultSet.getString(&quot;Sender&quot;);</b>
+<b class="nc">&nbsp;                String receiver = resultSet.getString(&quot;Receiver&quot;);</b>
+<b class="nc">&nbsp;                double amount = resultSet.getDouble(&quot;Amount&quot;);</b>
+<b class="nc">&nbsp;                String dateStr = resultSet.getString(&quot;Date&quot;);</b>
+<b class="nc">&nbsp;                String message = resultSet.getString(&quot;Message&quot;);</b>
+&nbsp;
+&nbsp;                // Getting Date From TimeLine
+<b class="nc">&nbsp;                LocalDate date = null;</b>
+&nbsp;                try {
+<b class="nc">&nbsp;                    date = LocalDate.parse(dateStr);</b>
+<b class="nc">&nbsp;                } catch (Exception e) {</b>
+<b class="nc">&nbsp;                    e.printStackTrace();</b>
+<b class="nc">&nbsp;                    System.out.println(&quot;Error DATE: &quot; + dateStr);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                transactions.add(new Transaction(sender, receiver, amount, date, message));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;            System.out.println(&quot;Request ERROR: &quot; + e.getMessage());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateTransactions(){
+<b class="nc">&nbsp;        allTransactions.clear();</b>
+<b class="nc">&nbsp;        prepareTransactions(allTransactions, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addTransaction(Transaction transaction) {
+&nbsp;        // ??????? ???? ??????????
+<b class="nc">&nbsp;        latestTransactions.add(0, transaction);</b>
+&nbsp;
+&nbsp;        // ??????????? ?????? ??????
+<b class="nc">&nbsp;        if (latestTransactions.size() &gt; 4) {</b>
+<b class="nc">&nbsp;            latestTransactions.remove(latestTransactions.size() - 1); // ????????? ?????????? ??????????</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLatestTransactions() {
+<b class="nc">&nbsp;        prepareTransactions(this.latestTransactions, 4);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObservableList&lt;Transaction&gt; getLatestTransactions(){
+<b class="nc">&nbsp;        return latestTransactions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAllTransactions(){
+<b class="nc">&nbsp;        prepareTransactions(this.allTransactions, -1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObservableList&lt;Transaction&gt; getAllTransactions() {
+<b class="nc">&nbsp;        return allTransactions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateBalance(){
+<b class="nc">&nbsp;        Model.getInstance().getClient().salesAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getSalesAccountBalance(Model.getInstance().getClient().pAddressProperty().get()));</b>
+<b class="nc">&nbsp;        Model.getInstance().getClient().fungibleAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getFungibleAccountBalance(Model.getInstance().getClient().pAddressProperty().get()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Admin Method Section
+&nbsp;     * */
+&nbsp;
+<b class="nc">&nbsp;    public boolean getAdminLoginSuccessFlag(){return this.adminLoginSuccessFlag;}</b>
+&nbsp;
+<b class="nc">&nbsp;    public void setAdminLoginSuccessFlag(boolean adminLoginSuccessFlag) {this.adminLoginSuccessFlag = adminLoginSuccessFlag;}</b>
+&nbsp;
+&nbsp;    public void evaluateAdminCredentials(String username, String password){
+<b class="nc">&nbsp;        ResultSet resultSet = databaseDriver.getAdminData(username, password);</b>
+&nbsp;        try{
+<b class="nc">&nbsp;            if(resultSet.isBeforeFirst()){</b>
+<b class="nc">&nbsp;                this.adminLoginSuccessFlag = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObservableList&lt;Client&gt; getClients() {
+<b class="nc">&nbsp;        return clients;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setClients(){
+&nbsp;        FungibleAccount fungibleAccount;
+&nbsp;        SalesAccount salesAccount;
+<b class="nc">&nbsp;        ResultSet resultSet = databaseDriver.getAllClientsData();</b>
+&nbsp;        try{
+<b class="nc">&nbsp;            while(resultSet.next()) {</b>
+<b class="nc">&nbsp;                String fName = resultSet.getString(&quot;FirstName&quot;);</b>
+<b class="nc">&nbsp;                String lName = resultSet.getString(&quot;LastName&quot;);</b>
+<b class="nc">&nbsp;                String pAddress = resultSet.getString(&quot;PayeeAddress&quot;);</b>
+<b class="nc">&nbsp;                String[] dateParts = resultSet.getString(&quot;Date&quot;).split(&quot;-&quot;);</b>
+<b class="nc">&nbsp;                LocalDate date = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));</b>
+<b class="nc">&nbsp;                fungibleAccount = getFungibleAccount(pAddress);</b>
+<b class="nc">&nbsp;                salesAccount = getSalesAccount(pAddress);</b>
+<b class="nc">&nbsp;                clients.add(new Client(fName, lName, pAddress, fungibleAccount, salesAccount, date));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObservableList&lt;Client&gt; searchClient(String pAddress){
+<b class="nc">&nbsp;        ObservableList&lt;Client&gt; searchResults = FXCollections.observableArrayList();</b>
+<b class="nc">&nbsp;        ResultSet resultSet = databaseDriver.searchClient(pAddress);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            FungibleAccount fungibleAccount = getFungibleAccount(pAddress);</b>
+<b class="nc">&nbsp;            SalesAccount salesAccount = getSalesAccount(pAddress);</b>
+<b class="nc">&nbsp;            String fName = resultSet.getString(&quot;FirstName&quot;);</b>
+<b class="nc">&nbsp;            String lName = resultSet.getString(&quot;LastName&quot;);</b>
+<b class="nc">&nbsp;            String[] dateParts = resultSet.getString(&quot;Date&quot;).split(&quot;-&quot;);</b>
+<b class="nc">&nbsp;            LocalDate date = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));</b>
+<b class="nc">&nbsp;            searchResults.add(new Client(fName, lName, pAddress, fungibleAccount, salesAccount, date));</b>
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return searchResults;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /*
+&nbsp;     * Utility Methods Section
+&nbsp;     */
+&nbsp;    public FungibleAccount getFungibleAccount(String pAddress){
+<b class="nc">&nbsp;        FungibleAccount account = null;</b>
+<b class="nc">&nbsp;        ResultSet resultSet = databaseDriver.getFungibleAccountData(pAddress);</b>
+&nbsp;        try{
+<b class="nc">&nbsp;            String num = resultSet.getString(&quot;AccountNumber&quot;);</b>
+<b class="nc">&nbsp;            int tLimit = (int)resultSet.getDouble(&quot;TransactionLimit&quot;);</b>
+<b class="nc">&nbsp;            double balance = resultSet.getDouble(&quot;Balance&quot;);</b>
+<b class="nc">&nbsp;            account = new FungibleAccount(pAddress, num,balance, tLimit);</b>
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return account;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SalesAccount getSalesAccount(String pAddress){
+<b class="nc">&nbsp;        SalesAccount account = null;</b>
+<b class="nc">&nbsp;        ResultSet resultSet = databaseDriver.getSalesAccountData(pAddress);</b>
+&nbsp;        try{
+<b class="nc">&nbsp;            String num = resultSet.getString(&quot;AccountNumber&quot;);</b>
+<b class="nc">&nbsp;            double wLimit = resultSet.getDouble(&quot;WithdrawalLimit&quot;);</b>
+<b class="nc">&nbsp;            double balance = resultSet.getDouble(&quot;Balance&quot;);</b>
+<b class="nc">&nbsp;            account = new SalesAccount(pAddress, num,balance, wLimit);</b>
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return account;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

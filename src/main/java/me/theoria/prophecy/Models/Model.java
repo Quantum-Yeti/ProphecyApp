@@ -6,6 +6,11 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.util.Arrays.asList;
 
 public class Model {
     private static Model model;
@@ -91,7 +96,7 @@ public class Model {
                 // Getting Date From TimeLine
                 LocalDate date = null;
                 try {
-                    date = LocalDate.parse(dateStr); // Парсинг рядка у LocalDate
+                    date = LocalDate.parse(dateStr);
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("Error DATE: " + dateStr);
@@ -231,6 +236,14 @@ public class Model {
         }
         return account;
     }
+
+
+
+
+
+
+
+
 }
 
 

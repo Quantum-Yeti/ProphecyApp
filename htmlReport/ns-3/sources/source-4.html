@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ClientCellController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Controllers.Admin</a>
+</div>
+
+<h1>Coverage Summary for Class: ClientCellController (me.theoria.prophecy.Controllers.Admin)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClientCellController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Controllers.Admin;
+&nbsp;
+&nbsp;import me.theoria.prophecy.Models.Client;
+&nbsp;import javafx.fxml.Initializable;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.ResourceBundle;
+&nbsp;
+&nbsp;public class ClientCellController implements Initializable {
+&nbsp;
+&nbsp;    public Label fname_lbl;
+&nbsp;    public Label lname_lbl;
+&nbsp;    public Label pAdress_lbl;
+&nbsp;    public Label ch_acc_lbl;
+&nbsp;    public Label sv_acc_lbl;
+&nbsp;    public Label date_lbl;
+&nbsp;    public Button delete_btn;
+&nbsp;
+&nbsp;    private final Client client;
+&nbsp;
+<b class="nc">&nbsp;    public ClientCellController(Client client){</b>
+<b class="nc">&nbsp;        this.client = client;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void initialize(URL url, ResourceBundle resourceBundle) {
+<b class="nc">&nbsp;        fname_lbl.textProperty().bind(client.firstNameProperty());</b>
+<b class="nc">&nbsp;        lname_lbl.textProperty().bind(client.lastNameProperty());</b>
+<b class="nc">&nbsp;        pAdress_lbl.textProperty().bind(client.pAddressProperty());</b>
+<b class="nc">&nbsp;        ch_acc_lbl.textProperty().bind(client.fungibleAccountProperty().asString());</b>
+<b class="nc">&nbsp;        sv_acc_lbl.textProperty().bind(client.salesAccountProperty().asString());</b>
+<b class="nc">&nbsp;        date_lbl.textProperty().bind(client.dateProperty().asString());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

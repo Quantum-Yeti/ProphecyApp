@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > LinearRegression</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Controllers.Client</a>
+</div>
+
+<h1>Coverage Summary for Class: LinearRegression (me.theoria.prophecy.Controllers.Client)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LinearRegression</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Controllers.Client;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import java.util.stream.IntStream;
+&nbsp;
+&nbsp;import static java.util.Arrays.asList;
+&nbsp;
+&nbsp;import me.theoria.prophecy.Models.Model;
+&nbsp;
+<b class="nc">&nbsp;public class LinearRegression {</b>
+<b class="nc">&nbsp;    private static final List&lt;Integer&gt; x = asList(2, 3, 5, 7, 9, 11, 14); // Consecutive hours developer codes</b>
+<b class="nc">&nbsp;    private static final List&lt;Integer&gt; y = asList(4, 5, 7, 10, 15, 20, 40); // Number of bugs produced</b>
+&nbsp;
+&nbsp;    private static Double predictForValue(int predictForDependentVariable) {
+<b class="nc">&nbsp;        if (x.size() != y.size())</b>
+<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Must have equal X and Y data points&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        Integer numberOfDataValues = x.size();</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Double&gt; xSquared = x</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .map(position -&gt; Math.pow(position, 2))</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Integer&gt; xMultipliedByY = IntStream.range(0, numberOfDataValues)</b>
+<b class="nc">&nbsp;                .map(i -&gt; x.get(i) * y.get(i))</b>
+<b class="nc">&nbsp;                .boxed()</b>
+<b class="nc">&nbsp;                .collect(Collectors.toList());</b>
+&nbsp;
+<b class="nc">&nbsp;        Integer xSummed = x</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .reduce((prev, next) -&gt; prev + next)</b>
+<b class="nc">&nbsp;                .get();</b>
+&nbsp;
+<b class="nc">&nbsp;        Integer ySummed = y</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .reduce((prev, next) -&gt; prev + next)</b>
+<b class="nc">&nbsp;                .get();</b>
+&nbsp;
+<b class="nc">&nbsp;        Double sumOfXSquared = xSquared</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .reduce((prev, next) -&gt; prev + next)</b>
+<b class="nc">&nbsp;                .get();</b>
+&nbsp;
+<b class="nc">&nbsp;        Integer sumOfXMultipliedByY = xMultipliedByY</b>
+<b class="nc">&nbsp;                .stream()</b>
+<b class="nc">&nbsp;                .reduce((prev, next) -&gt; prev + next)</b>
+<b class="nc">&nbsp;                .get();</b>
+&nbsp;
+<b class="nc">&nbsp;        int slopeNominator = numberOfDataValues * sumOfXMultipliedByY - ySummed * xSummed;</b>
+<b class="nc">&nbsp;        Double slopeDenominator = numberOfDataValues * sumOfXSquared - Math.pow(xSummed, 2);</b>
+<b class="nc">&nbsp;        Double slope = slopeNominator / slopeDenominator;</b>
+&nbsp;
+<b class="nc">&nbsp;        double interceptNominator = ySummed - slope * xSummed;</b>
+<b class="nc">&nbsp;        double interceptDenominator = numberOfDataValues;</b>
+<b class="nc">&nbsp;        Double intercept = interceptNominator / interceptDenominator;</b>
+&nbsp;
+<b class="nc">&nbsp;        return (slope * predictForDependentVariable) + intercept;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void printResult(){
+<b class="nc">&nbsp;        System.out.println(predictForValue(13));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

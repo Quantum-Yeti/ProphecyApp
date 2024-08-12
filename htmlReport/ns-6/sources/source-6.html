@@ -1,0 +1,346 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ViewFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Views</a>
+</div>
+
+<h1>Coverage Summary for Class: ViewFactory (me.theoria.prophecy.Views)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ViewFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (4/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    15.8%
+  </span>
+  <span class="absValue">
+    (15/95)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Views;
+&nbsp;
+&nbsp;import javafx.scene.control.ScrollPane;
+&nbsp;import me.theoria.prophecy.Controllers.Admin.AdminController;
+&nbsp;import me.theoria.prophecy.Controllers.Client.ClientController;
+&nbsp;import me.theoria.prophecy.Models.Model;
+&nbsp;import javafx.beans.property.ObjectProperty;
+&nbsp;import javafx.beans.property.SimpleObjectProperty;
+&nbsp;import javafx.fxml.FXMLLoader;
+&nbsp;import javafx.geometry.Pos;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;import javafx.scene.control.TextArea;
+&nbsp;import javafx.scene.image.Image;
+&nbsp;import javafx.scene.layout.AnchorPane;
+&nbsp;import javafx.scene.layout.HBox;
+&nbsp;import javafx.scene.layout.StackPane;
+&nbsp;import javafx.scene.layout.VBox;
+&nbsp;import javafx.stage.Modality;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;public class ViewFactory {
+&nbsp;    private AccountType loginAccountType;
+&nbsp;    // Client Views
+&nbsp;    private final ObjectProperty&lt;ClientMenuOptions&gt; clientSelectedMenuItem;
+&nbsp;    private AnchorPane dashboardView;
+&nbsp;    private AnchorPane transactionsView;
+&nbsp;    private AnchorPane accountsView;
+&nbsp;    private AnchorPane summaryView;
+&nbsp;
+&nbsp;    // Admin Views
+&nbsp;    private final ObjectProperty&lt;AdminMenuOptions&gt; adminSelectedMenuItem;
+&nbsp;    private AnchorPane createClientView;
+&nbsp;    private AnchorPane clientsView;
+&nbsp;    private AnchorPane depositView;
+&nbsp;
+<b class="fc">&nbsp;    public ViewFactory(){</b>
+<b class="fc">&nbsp;        this.loginAccountType = AccountType.CLIENT;</b>
+<b class="fc">&nbsp;        this.clientSelectedMenuItem = new SimpleObjectProperty&lt;&gt;();</b>
+<b class="fc">&nbsp;        this.adminSelectedMenuItem = new SimpleObjectProperty&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public AccountType getLoginAccountType() {
+<b class="fc">&nbsp;        return loginAccountType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLoginAccountType(AccountType loginAccountType) {
+<b class="nc">&nbsp;        this.loginAccountType = loginAccountType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Client View Section */
+&nbsp;
+&nbsp;    public ObjectProperty&lt;ClientMenuOptions&gt; getClientSelectedMenuItem() {
+<b class="nc">&nbsp;        return clientSelectedMenuItem;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Display the main dashboard for the client
+&nbsp;    public AnchorPane getDashboardView(){
+<b class="nc">&nbsp;        if(dashboardView == null){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                dashboardView = new FXMLLoader(getClass().getResource(&quot;/Fxml/Client/Dashboard.fxml&quot;)).load();</b>
+<b class="nc">&nbsp;            }catch (Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return dashboardView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Display the recent transactions
+&nbsp;    public AnchorPane getTransactionsView() {
+<b class="nc">&nbsp;        if(transactionsView == null){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                transactionsView = new FXMLLoader(getClass().getResource(&quot;/Fxml/Client/Transactions.fxml&quot;)).load();</b>
+<b class="nc">&nbsp;            }catch (Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return transactionsView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Display the accounts for client
+&nbsp;    public AnchorPane getAccountsView() {
+<b class="nc">&nbsp;        if(accountsView == null){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                accountsView = new FXMLLoader(getClass().getResource(&quot;/Fxml/Client/Accounts.fxml&quot;)).load();</b>
+<b class="nc">&nbsp;            }catch (Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return accountsView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Display the summary window
+&nbsp;    public AnchorPane getSummaryView(){
+<b class="nc">&nbsp;        if(summaryView == null){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                summaryView = new FXMLLoader(getClass().getResource(&quot;/Fxml/Client/ClientSummary.fxml&quot;)).load();</b>
+<b class="nc">&nbsp;            }catch (Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return summaryView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Create Client window stage in JavaFX
+&nbsp;    public void showClientWindow(){
+<b class="nc">&nbsp;        FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;/Fxml/Client/Client.fxml&quot;));</b>
+<b class="nc">&nbsp;        ClientController clientController = new ClientController();</b>
+<b class="nc">&nbsp;        loader.setController(clientController);</b>
+<b class="nc">&nbsp;        createStage(loader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /* Admin Views Section */
+&nbsp;
+&nbsp;    public ObjectProperty&lt;AdminMenuOptions&gt; getAdminSelectedMenuItem(){
+<b class="nc">&nbsp;        return adminSelectedMenuItem;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Create amd display the admin client creation window
+&nbsp;    public AnchorPane getCreateClientView() {
+<b class="nc">&nbsp;        if(createClientView==null){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                createClientView = new FXMLLoader(getClass().getResource(&quot;/Fxml/Admin/CreateClient.fxml&quot;)).load();</b>
+<b class="nc">&nbsp;            }catch (Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return createClientView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Display the admin client list
+&nbsp;    public AnchorPane getClientsView(){
+<b class="nc">&nbsp;        if(clientsView==null){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                clientsView = new FXMLLoader(getClass().getResource(&quot;/Fxml/Admin/Clients.fxml&quot;)).load();</b>
+<b class="nc">&nbsp;            }catch (Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return clientsView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Return the admin deposit window to send funds to clients
+&nbsp;    public AnchorPane getDepositView(){
+<b class="nc">&nbsp;        if(depositView==null){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                depositView = new FXMLLoader(getClass().getResource(&quot;/Fxml/Admin/Deposit.fxml&quot;)).load();</b>
+<b class="nc">&nbsp;            }catch (Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return depositView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Create the stage for the admin window
+&nbsp;    public void showAdminWindow(){
+<b class="nc">&nbsp;        FXMLLoader loader =new FXMLLoader(getClass().getResource(&quot;/Fxml/Admin/Admin.fxml&quot;));</b>
+<b class="nc">&nbsp;        AdminController controller = new AdminController();</b>
+<b class="nc">&nbsp;        loader.setController(controller);</b>
+<b class="nc">&nbsp;        createStage(loader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Create the stage for the login/splash window
+&nbsp;    public void showLoginWindow(){
+<b class="fc">&nbsp;        FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;/Fxml/Login.fxml&quot;));</b>
+<b class="fc">&nbsp;        createStage(loader);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Display the report window
+&nbsp;    public void showReportWindow(){
+<b class="nc">&nbsp;        VBox vBox = new VBox();</b>
+<b class="nc">&nbsp;        vBox.setAlignment(Pos.CENTER);</b>
+<b class="nc">&nbsp;        TextArea textArea = new TextArea();</b>
+<b class="nc">&nbsp;        Button button = new Button(&quot;Send&quot;);</b>
+<b class="nc">&nbsp;        vBox.getChildren().addAll(textArea,button);</b>
+<b class="nc">&nbsp;        Scene scene = new Scene(vBox, 300, 100);</b>
+<b class="nc">&nbsp;        Stage stage = new Stage();</b>
+<b class="nc">&nbsp;        button.setOnAction(e-&gt;{</b>
+<b class="nc">&nbsp;            Model.getInstance().getDatabaseDriver().sendReport(Model.getInstance().getClient().pAddressProperty().get(), textArea.getText());</b>
+<b class="nc">&nbsp;            closeStage(stage);</b>
+&nbsp;        });
+<b class="nc">&nbsp;        stage.getIcons().add(new Image(String.valueOf(getClass().getResource(&quot;/Images/icon.png&quot;))));</b>
+<b class="nc">&nbsp;        stage.setResizable(false);</b>
+<b class="nc">&nbsp;        stage.initModality(Modality.APPLICATION_MODAL);</b>
+<b class="nc">&nbsp;        stage.setTitle(&quot;Report&quot;);</b>
+<b class="nc">&nbsp;        stage.setScene(scene);</b>
+<b class="nc">&nbsp;        stage.show();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Display the message window
+&nbsp;    public void showMessageWindow(String pAddress, String messageText){
+<b class="nc">&nbsp;        StackPane pane = new StackPane();</b>
+<b class="nc">&nbsp;        HBox hBox = new HBox(5);</b>
+<b class="nc">&nbsp;        hBox.setAlignment(Pos.CENTER);</b>
+<b class="nc">&nbsp;        Label sender = new Label(pAddress);</b>
+<b class="nc">&nbsp;        Label message = new Label(messageText);</b>
+<b class="nc">&nbsp;        hBox.getChildren().addAll(sender,message);</b>
+<b class="nc">&nbsp;        pane.getChildren().addAll(hBox);</b>
+<b class="nc">&nbsp;        Scene scene = new Scene(pane, 300, 100);</b>
+<b class="nc">&nbsp;        Stage stage = new Stage();</b>
+<b class="nc">&nbsp;        stage.getIcons().add(new Image(String.valueOf(getClass().getResource(&quot;/Images/icon.png&quot;))));</b>
+<b class="nc">&nbsp;        stage.setResizable(false);</b>
+<b class="nc">&nbsp;        stage.initModality(Modality.APPLICATION_MODAL);</b>
+<b class="nc">&nbsp;        stage.setTitle(&quot;Message&quot;);</b>
+<b class="nc">&nbsp;        stage.setScene(scene);</b>
+<b class="nc">&nbsp;        stage.show();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Create and display JavaFX stage
+&nbsp;    private void createStage(FXMLLoader loader){
+<b class="fc">&nbsp;        Scene scene = null;</b>
+&nbsp;        try{
+<b class="fc">&nbsp;            scene = new Scene(loader.load());</b>
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Stage stage = new Stage();</b>
+<b class="fc">&nbsp;        stage.setScene(scene);</b>
+<b class="fc">&nbsp;        stage.getIcons().add(new Image(String.valueOf(getClass().getResource(&quot;/Images/icon.png&quot;))));</b>
+<b class="fc">&nbsp;        stage.setResizable(true);</b>
+<b class="fc">&nbsp;        stage.setTitle(&quot;Prophecy&quot;);</b>
+<b class="fc">&nbsp;        stage.show();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Formally close JavaFX stage
+&nbsp;    public void closeStage(Stage stage){
+<b class="nc">&nbsp;        stage.close();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

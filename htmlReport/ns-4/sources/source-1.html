@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > AccountsController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Controllers.Client</a>
+</div>
+
+<h1>Coverage Summary for Class: AccountsController (me.theoria.prophecy.Controllers.Client)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AccountsController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Controllers.Client;
+&nbsp;
+&nbsp;import me.theoria.prophecy.Models.Model;
+&nbsp;import javafx.fxml.Initializable;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;import javafx.scene.control.TextField;
+&nbsp;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.ResourceBundle;
+&nbsp;
+&nbsp;// Declare JavaFX endpoints
+<b class="nc">&nbsp;public class AccountsController implements Initializable {</b>
+&nbsp;    public Label fu_acc_num;
+&nbsp;    public Label fu_date;
+&nbsp;    public Label fu_acc_bal;
+&nbsp;    public Label sa_acc_num;
+&nbsp;    public Label sa_acc_date;
+&nbsp;    public Label sa_acc_bal;
+&nbsp;    public TextField amount_to_sa;
+&nbsp;    public Button trans_to_sa_btn;
+&nbsp;    public TextField amount_to_fu;
+&nbsp;    public Button trans_to_fu_btn;
+&nbsp;
+&nbsp;    // Initialize sending of money
+&nbsp;    @Override
+&nbsp;    public void initialize(URL url, ResourceBundle resourceBundle) {
+<b class="nc">&nbsp;        bindData();</b>
+<b class="nc">&nbsp;        trans_to_sa_btn.setOnAction(e -&gt; {</b>
+<b class="nc">&nbsp;            Model.getInstance().getDatabaseDriver().moveFundsOnAccount(Model.getInstance().getClient().pAddressProperty().get(), Double.parseDouble(amount_to_sa.getText()), &quot;checking&quot;);</b>
+<b class="nc">&nbsp;            updateUI();</b>
+<b class="nc">&nbsp;            emptyFields();</b>
+&nbsp;        });
+<b class="nc">&nbsp;        trans_to_fu_btn.setOnAction(e -&gt; {</b>
+<b class="nc">&nbsp;            Model.getInstance().getDatabaseDriver().moveFundsOnAccount(Model.getInstance().getClient().pAddressProperty().get(), Double.parseDouble(amount_to_fu.getText()), &quot;savings&quot;);</b>
+<b class="nc">&nbsp;            updateUI();</b>
+<b class="nc">&nbsp;            emptyFields();</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    // Bind data to JavaFX
+&nbsp;    public void bindData() {
+<b class="nc">&nbsp;        fu_acc_num.textProperty().bind(Model.getInstance().getClient().fungibleAccountProperty().get().accountNumberProperty());</b>
+<b class="nc">&nbsp;        sa_acc_num.textProperty().bind(Model.getInstance().getClient().salesAccountProperty().get().accountNumberProperty());</b>
+<b class="nc">&nbsp;        fu_acc_bal.textProperty().bind(Model.getInstance().getClient().fungibleAccountProperty().get().balanceProperty().asString());</b>
+<b class="nc">&nbsp;        sa_acc_bal.textProperty().bind(Model.getInstance().getClient().salesAccountProperty().get().balanceProperty().asString());</b>
+<b class="nc">&nbsp;        fu_date.textProperty().bind(Model.getInstance().getClient().dateProperty().asString());</b>
+<b class="nc">&nbsp;        sa_acc_date.textProperty().bind(Model.getInstance().getClient().dateProperty().asString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Update the UI
+<b class="nc">&nbsp;    public void updateUI() {Model.getInstance().updateBalance();}</b>
+&nbsp;
+&nbsp;    // Empty fields after use
+&nbsp;    public void emptyFields(){
+<b class="nc">&nbsp;        amount_to_fu.setText(&quot;&quot;);</b>
+<b class="nc">&nbsp;        amount_to_sa.setText(&quot;&quot;);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

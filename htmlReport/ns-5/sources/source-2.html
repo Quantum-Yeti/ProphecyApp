@@ -1,0 +1,141 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Client</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Models</a>
+</div>
+
+<h1>Coverage Summary for Class: Client (me.theoria.prophecy.Models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Client</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (1/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.9%
+  </span>
+  <span class="absValue">
+    (9/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Models;
+&nbsp;
+&nbsp;import javafx.beans.property.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;public class Client {
+&nbsp;
+&nbsp;    private final StringProperty firstName;
+&nbsp;    private final StringProperty lastName;
+&nbsp;    private final StringProperty payeeAdress;
+&nbsp;    private final ObjectProperty&lt;Account&gt; fungibleAccount;
+&nbsp;    private final ObjectProperty&lt;Account&gt; salesAccount;
+&nbsp;    private final ObjectProperty&lt;LocalDate&gt; dateCreated;
+&nbsp;    private final IntegerProperty transactionLimit;
+&nbsp;    private final DoubleProperty withdrawalLimit;
+&nbsp;
+<b class="fc">&nbsp;    public Client(String fName, String lName, String pAddress, Account cAccount, Account sAccount, LocalDate date){</b>
+<b class="fc">&nbsp;        this.firstName = new SimpleStringProperty(this, &quot;FirstName&quot;, fName);</b>
+<b class="fc">&nbsp;        this.lastName = new SimpleStringProperty(this, &quot;LastName&quot;, lName);</b>
+<b class="fc">&nbsp;        this.payeeAdress = new SimpleStringProperty(this, &quot;Payee Address&quot;, pAddress);</b>
+<b class="fc">&nbsp;        this.fungibleAccount = new SimpleObjectProperty&lt;&gt;(this, &quot;Fungible Account&quot;, cAccount);</b>
+<b class="fc">&nbsp;        this.salesAccount =new SimpleObjectProperty&lt;&gt;(this, &quot;Sales Account&quot;, sAccount);</b>
+<b class="fc">&nbsp;        this.dateCreated =new SimpleObjectProperty&lt;&gt;(this, &quot;Date&quot;, date);</b>
+<b class="fc">&nbsp;        this.transactionLimit = new SimpleIntegerProperty(this, &quot;Transaction Limit&quot;, 10);</b>
+<b class="fc">&nbsp;        this.withdrawalLimit = new SimpleDoubleProperty(this, &quot;Withdrawal Limit&quot;, 2000.00);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public StringProperty firstNameProperty(){return firstName;}</b>
+<b class="nc">&nbsp;    public StringProperty lastNameProperty(){return lastName;}</b>
+<b class="nc">&nbsp;    public StringProperty pAddressProperty(){return payeeAdress;}</b>
+<b class="nc">&nbsp;    public ObjectProperty&lt;Account&gt; fungibleAccountProperty(){return fungibleAccount;}</b>
+<b class="nc">&nbsp;    public ObjectProperty&lt;Account&gt; salesAccountProperty(){return salesAccount;}</b>
+<b class="nc">&nbsp;    public ObjectProperty&lt;LocalDate&gt; dateProperty(){return dateCreated;}</b>
+<b class="nc">&nbsp;    public IntegerProperty transactionLimitProperty(){return transactionLimit;}</b>
+<b class="nc">&nbsp;    public DoubleProperty withdrawalLimitProperty(){return withdrawalLimit;}</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

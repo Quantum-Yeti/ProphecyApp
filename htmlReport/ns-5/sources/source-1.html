@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Account</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Models</a>
+</div>
+
+<h1>Coverage Summary for Class: Account (me.theoria.prophecy.Models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Account</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Models;
+&nbsp;
+&nbsp;import javafx.beans.property.DoubleProperty;
+&nbsp;import javafx.beans.property.SimpleDoubleProperty;
+&nbsp;import javafx.beans.property.SimpleStringProperty;
+&nbsp;import javafx.beans.property.StringProperty;
+&nbsp;
+&nbsp;public abstract class Account {
+&nbsp;    private final StringProperty owner;
+&nbsp;    private final StringProperty accountNumber;
+&nbsp;    private final DoubleProperty balance;
+&nbsp;
+<b class="nc">&nbsp;    public Account(String owner, String accountNumber, double balance){</b>
+<b class="nc">&nbsp;        this.owner = new SimpleStringProperty(this, &quot;Owner&quot;, owner);</b>
+<b class="nc">&nbsp;        this.accountNumber = new SimpleStringProperty(this, &quot;Account Number&quot;, accountNumber);</b>
+<b class="nc">&nbsp;        this.balance = new SimpleDoubleProperty(this, &quot;Balance&quot;, balance);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public StringProperty ownerProperty(){return owner;}</b>
+<b class="nc">&nbsp;    public StringProperty accountNumberProperty(){return accountNumber;}</b>
+<b class="nc">&nbsp;    public DoubleProperty balanceProperty(){return balance;}</b>
+<b class="nc">&nbsp;    public void setBalance(double balance){this.balance.set(balance);}</b>
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

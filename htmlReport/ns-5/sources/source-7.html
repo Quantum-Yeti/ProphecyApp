@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Transaction</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">me.theoria.prophecy.Models</a>
+</div>
+
+<h1>Coverage Summary for Class: Transaction (me.theoria.prophecy.Models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Transaction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package me.theoria.prophecy.Models;
+&nbsp;
+&nbsp;import javafx.beans.property.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;public class Transaction {
+&nbsp;
+&nbsp;    private final StringProperty sender;
+&nbsp;    private final StringProperty receiver;
+&nbsp;    private final DoubleProperty amount;
+&nbsp;    private final ObjectProperty&lt;LocalDate&gt; date;
+&nbsp;    private final StringProperty message;
+&nbsp;
+<b class="nc">&nbsp;    public Transaction(String sender, String receiver, double amount, LocalDate date, String message){</b>
+<b class="nc">&nbsp;        this.sender = new SimpleStringProperty(this, &quot;Sender&quot;, sender);</b>
+<b class="nc">&nbsp;        this.receiver = new SimpleStringProperty(this, &quot;Receiver&quot;, receiver);</b>
+<b class="nc">&nbsp;        this.amount = new SimpleDoubleProperty(this, &quot;Amount&quot;, amount);</b>
+<b class="nc">&nbsp;        this.date = new SimpleObjectProperty&lt;&gt;(this, &quot;Date&quot;, date);</b>
+<b class="nc">&nbsp;        this.message = new SimpleStringProperty(this, &quot;Message&quot;, message);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public StringProperty senderProperty(){return this.sender;}</b>
+<b class="nc">&nbsp;    public StringProperty receiverProperty(){return this.receiver;}</b>
+<b class="nc">&nbsp;    public DoubleProperty amountProperty(){return this.amount;}</b>
+<b class="nc">&nbsp;    public ObjectProperty&lt;LocalDate&gt; dateProperty(){return this.date;}</b>
+<b class="nc">&nbsp;    public StringProperty messageProperty(){return this.message;}</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-12 05:08</div>
+</div>
+</body>
+</html>

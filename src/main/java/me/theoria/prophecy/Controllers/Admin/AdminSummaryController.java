@@ -1,5 +1,5 @@
 package me.theoria.prophecy.Controllers.Admin;
 
-public class SummaryController {
+public class AdminSummaryController {
 
 }
