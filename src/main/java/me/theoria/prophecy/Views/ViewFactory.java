@@ -214,7 +214,8 @@ public class ViewFactory {
         try {
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.CENTER);
-            TextArea textArea = new TextArea();
+            TextArea textArea = new TextArea("Check the console for your line of regression.");
+            textArea.getText();
             Scene scene = new Scene(vBox, 300, 100);
             Stage stage = new Stage();
             stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icon.png"))));
