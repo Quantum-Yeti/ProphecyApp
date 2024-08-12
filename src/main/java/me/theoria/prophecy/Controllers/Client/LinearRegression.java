@@ -9,8 +9,8 @@ import static java.util.Arrays.asList;
 import me.theoria.prophecy.Models.Model;
 
 public class LinearRegression {
-    private static final List<Integer> x = asList(2, 3, 5, 7, 9, 11, 14); // Consecutive hours developer codes
-    private static final List<Integer> y = asList(4, 5, 7, 10, 15, 20, 40); // Number of bugs produced
+    private static final List<Integer> x = asList(1194, 1000, 1000, 756, 2045, 4020, 2500, 2311, 6000);
+    private static final List<Integer> y = asList(13337, 27000, 14000, 6210, 16992, 40500, 26500, 1411, 27200);
 
     public static Double predictForValue(int predictForDependentVariable) {
         if (x.size() != y.size())

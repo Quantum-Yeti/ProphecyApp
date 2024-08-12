@@ -121,7 +121,7 @@ public class Model {
 
         // Перевіряємо розмір списку
         if (latestTransactions.size() > 4) {
-            latestTransactions.remove(latestTransactions.size() - 1); // Видаляємо найстарішу транзакцію
+            latestTransactions.remove(latestTransactions.size() - 1);
         }
     }
 
