@@ -23,17 +23,17 @@
       <TextField fx:id="lname_fld" layoutX="10.0" layoutY="28.0"/>
       <Text layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:"/>
       <TextField fx:id="password_fld"/>
-      <Text layoutX="10.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payee Adress:"/>
+      <Text layoutX="10.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:"/>
       <CheckBox fx:id="payeeadress_box" mnemonicParsing="false"/>
       <Label fx:id="payeeadress_lbl" styleClass="payee_adress_lbl"/>
       <Text layoutX="10.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts:"/>
       <CheckBox fx:id="ch_acc_box" layoutX="10.0" layoutY="158.0" mnemonicParsing="false"
-                text="Add Checking Account"/>
-      <Text layoutX="10.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Checking Account Balance:"/>
+                text="Add Fungible Account"/>
+      <Text layoutX="10.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fungible Account Balance:"/>
       <TextField fx:id="ch_amount_fld" layoutX="10.0" layoutY="113.0"/>
       <CheckBox fx:id="sv_acc_box" layoutX="10.0" layoutY="208.0" mnemonicParsing="false"
-                text="Add Savings Account"/>
-      <Text layoutX="10.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Savings Account Balance:"/>
+                text="Add Sales Account"/>
+      <Text layoutX="10.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales Account Balance:"/>
       <TextField fx:id="sv_amount_fld" layoutX="23.0" layoutY="503.0"/>
       <Button fx:id="create_client_btn" mnemonicParsing="false" text="Create New Client"/>
       <Label fx:id="error_lbl" styleClass="error_lbl"/>

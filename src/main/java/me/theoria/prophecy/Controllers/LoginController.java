@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
         if(acc_selector.getValue() == AccountType.ADMIN){
             payee_adress_lbl.setText("Username:");
         }else {
-            payee_adress_lbl.setText("Payee Address:");
+            payee_adress_lbl.setText("Client @Username:");
         }
     }
 }

@@ -1,5 +1,6 @@
 package me.theoria.prophecy.Views;
 
+import javafx.scene.control.ScrollPane;
 import me.theoria.prophecy.Controllers.Admin.AdminController;
 import me.theoria.prophecy.Controllers.Client.ClientController;
 import me.theoria.prophecy.Models.Model;
@@ -26,7 +27,7 @@ public class ViewFactory {
     private AnchorPane dashboardView;
     private AnchorPane transactionsView;
     private AnchorPane accountsView;
-    private AnchorPane profileView;
+    private AnchorPane summaryView;
 
     // Admin Views
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -92,14 +93,14 @@ public class ViewFactory {
 
     // Display the summary window
     public AnchorPane getSummaryView(){
-        if(profileView == null){
+        if(summaryView == null){
             try{
-                profileView = new FXMLLoader(getClass().getResource("/Fxml/Client/Summary.fxml")).load();
+                summaryView = new FXMLLoader(getClass().getResource("/Fxml/Client/ClientSummary.fxml")).load();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-        return profileView;
+        return summaryView;
     }
 
     // Create Client window stage in JavaFX
@@ -217,7 +218,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icon.png"))));
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Prophecy");
         stage.show();
     }
